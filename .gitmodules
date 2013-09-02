@@ -1,0 +1,3 @@
+[submodule "dogtail_gui_helper"]
+    path = dogtail_gui_helper
+    url = https://github.com/fedora-desktop-tests/dogtail_gui_helper.git
