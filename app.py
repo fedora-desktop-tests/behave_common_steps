@@ -53,7 +53,7 @@ def close_app_via_gnome_panel(context):
 
 @step(u'Make sure that {app} is running')
 def ensure_app_running(context, app):
-    start_app_via_command(context, app, 'menu')
+    start_app_via_command(context, app, 'command')
     wait_for_app_to_appear(context, app)
     logging.debug("app = %s", root.application(app.lower()))
 
