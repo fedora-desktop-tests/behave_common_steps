@@ -60,12 +60,19 @@ def ensure_app_running(context, app):
 
 @then(u'{app} should start')
 def test_app_started(context, app):
-    assert app.lower() in [x.name for x in root.applications()],\
-        "App '%s' is not running" % app
+    # Dogtail seems to cache applications list
+    # So we should wait for exception here
+    try:
+        root.application(app.lower())
+    except SearchError:
+        raise RuntimeError("App '%s' is not running" % app)
 
 
 @then(u"{app} shouldn't be running anymore")
 def then_app_is_dead(context, app):
-    assert app.lower() not in [x.name for x in root.applications()],\
-        "App '%s' is still running" % app
+    try:
+        root.application(app.lower())
+        raise RuntimeError("App '%s' is running" % app)
+    except SearchError:
+        pass
 
