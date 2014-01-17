@@ -63,7 +63,7 @@ def test_app_started(context, app):
     # Dogtail seems to cache applications list
     # So we should wait for exception here
     try:
-        root.application(app.lower())
+        root.application(app.lower()).child(roleName='frame')
     except SearchError:
         raise RuntimeError("App '%s' is not running" % app)
 
@@ -71,7 +71,7 @@ def test_app_started(context, app):
 @then(u"{app} shouldn't be running anymore")
 def then_app_is_dead(context, app):
     try:
-        root.application(app.lower())
+        root.application(app.lower()).child(roleName='frame')
         raise RuntimeError("App '%s' is running" % app)
     except SearchError:
         pass
